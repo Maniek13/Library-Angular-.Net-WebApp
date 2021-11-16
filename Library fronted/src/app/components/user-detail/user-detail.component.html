@@ -1,0 +1,20 @@
+<div *ngIf="user" class="form-group">
+
+    <h2>{{user.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{user.userID}}</div>
+    <div>
+      <label for="user">User name: </label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="user.name"/>
+      <label for="surname">User surname: </label>
+      <input type="text" class="form-control" id="surname" required [(ngModel)]="user.surname"/>
+      <label for="login">Login: </label>
+      <input type="text" class="form-control" id="login" required [(ngModel)]="user.login"/>
+      <label for="password">Password: </label>
+      <input type="text" class="form-control" id="password" required [(ngModel)]="user.password"/>
+    </div>
+    <button (click)="goBack()">go back</button>
+    <button (click)="save()">save</button>
+</div>
+
+
+

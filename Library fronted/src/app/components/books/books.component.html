@@ -1,0 +1,11 @@
+<h2>Books List</h2>
+<ul class="books">
+  <li *ngFor="let book of books">
+      <span class="badge">{{book.bookID}}</span> {{book.title}}
+    <button class="add-to-list" title="Add to order"
+  (click)="addToOrder(book)">+</button>
+  </li>
+</ul>
+
+
+<app-books-order-list [book]="currentBook" (removeBookEvent)="addBookRemovedFromUser($event)"></app-books-order-list>

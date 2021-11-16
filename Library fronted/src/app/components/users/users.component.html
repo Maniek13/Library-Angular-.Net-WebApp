@@ -1,0 +1,29 @@
+<h2>My users</h2>
+<ul class="users">
+  <li *ngFor="let user of users">
+    <a routerLink="/detail/{{user.userID}}">
+      <span class="badge">{{user.userID}}</span> {{user.name}}
+    </a>
+    <button class="delete" title="delete user"
+  (click)="delete(user)">x</button>
+  </li>
+</ul>
+
+
+  <div class="form-group">
+  
+    <label for="user">User name: </label>
+    <input type="text" class="form-control" id="name" required [(ngModel)]="model.name"/>
+    <label for="surname">User surname: </label>
+    <input type="text" class="form-control" id="surname" required [(ngModel)]="model.surname"/>
+    <label for="login">Login: </label>
+    <input type="text" class="form-control" id="login" required [(ngModel)]="model.login"/>
+    <label for="password">Password: </label>
+    <input type="text" class="form-control" id="password" required [(ngModel)]="model.password"/>
+  
+    <button class="add-button" (click)="add();">
+      Add user
+    </button>
+  </div>
+
+
