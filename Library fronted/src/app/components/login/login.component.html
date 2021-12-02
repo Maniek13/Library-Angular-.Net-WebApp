@@ -4,15 +4,25 @@
     <h1>Login to your profile</h1>
 
     <div class="form-group">
-  
-        <label for="login">Title: </label>
-        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login"/>
-        <label for="password">Author: </label>
-        <input type="text" class="form-control" id="password" required [(ngModel)]="model.password"/>
       
-        <button class="login" (click)="login();">
-          Log in!
-        </button>
+      <div class="field">
+        <div class="label">Title: </div>
+        <div class="input">
+          <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" placeholder="login"/>
+        </div>
+        
+      </div>
+      <div class="field">
+        <div class="label">Author: </div>
+        <div class="input">
+          <input type="text" class="form-control" id="password" required [(ngModel)]="model.password" placeholder="password"/>
+        </div>
+      </div>
+
+      <button class="login" (click)="login();">
+        Log in!
+      </button>
+
     </div>
 </div>
 

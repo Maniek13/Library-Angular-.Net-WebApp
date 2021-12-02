@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Library';
+
+  constructor(){
+    document.body.style.background = "rgb(29,29,29)";
+  }
 }

@@ -1,0 +1,50 @@
+div{
+    color: white;
+}
+.form-group{
+    display: block;
+    position: relative;
+    margin-top: 150px;
+}
+
+.field{
+    width: 300px;
+    height: 25px;
+    padding: 20px;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.label{
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+.input{
+    width: 100%;
+}
+
+input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+button{
+    position: absolute;
+    left: calc(50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 100px;
+    background-color: white;
+    border: 0px;
+    padding: 5px;
+    margin-top: 25px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
