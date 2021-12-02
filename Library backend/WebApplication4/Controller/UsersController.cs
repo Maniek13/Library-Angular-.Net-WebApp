@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WebApplication4.Data;
 using WebApplication4.Models;
 
@@ -95,6 +97,23 @@ namespace WebApplication4.Controller
 
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
+
+        [HttpPost("login")]
+        public ActionResult<int> PostUser([FromBody] UserPassword userPassword)
+        {
+
+            User user = _context.User.FirstOrDefault(u => u.Login == userPassword.Login && u.Password == userPassword.Password);
+            if (user != null)
+            {
+                return user.UserID;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]

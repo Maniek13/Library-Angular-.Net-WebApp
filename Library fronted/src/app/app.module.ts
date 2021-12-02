@@ -12,6 +12,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { BooksComponent } from './components/books/books.component'
 import { BooksOrderListComponent } from './components/books-order-list/books-order-list.component';
+import { BooksAddComponent } from './components/books-add/books-add.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { BooksOrderListComponent } from './components/books-order-list/books-ord
     DashboardComponent,
     UserSearchComponent,
     BooksComponent,
-    BooksOrderListComponent
+    BooksOrderListComponent,
+    BooksAddComponent,
+    LoginComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<app-main *ngIf="userId" [userId]="userId"></app-main>
+
+<div [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
+    <h1>Login to your profile</h1>
+
+    <div class="form-group">
+  
+        <label for="login">Title: </label>
+        <input type="text" class="form-control" id="login" required [(ngModel)]="model.login"/>
+        <label for="password">Author: </label>
+        <input type="text" class="form-control" id="password" required [(ngModel)]="model.password"/>
+      
+        <button class="login" (click)="login();">
+          Log in!
+        </button>
+    </div>
+</div>
+
+
+
+
+   

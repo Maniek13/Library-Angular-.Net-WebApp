@@ -10,13 +10,14 @@ import { OrderService } from 'src/app/services/orders/orders.service';
 export class BooksOrderListComponent implements OnInit {
   books :Book[] = [];
 
-  @Input() book  :Book = <Book>{};
+  @Input() userId : number = 0;
+  @Input() book : Book = <Book>{};
   @Output() removeBookEvent = new EventEmitter<Book>();
 
   constructor(private orderService: OrderService) { }
 
   getBooks(): void {
-    this.orderService.getOrder(1).subscribe(books => this.books = books);
+    this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
   }
   
   ngOnInit() {
@@ -33,7 +34,5 @@ export class BooksOrderListComponent implements OnInit {
       this.books = this.books.filter(u => u !== book);
       this.removeBookEvent.emit(book);
     }, 100);
- 
   }
-
 }

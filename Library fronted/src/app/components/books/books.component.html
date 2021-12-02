@@ -1,4 +1,4 @@
-<h2>Books List</h2>
+<h2>Books List{{userId}}</h2>
 <ul class="books">
   <li *ngFor="let book of books">
       <span class="badge">{{book.bookID}}</span> {{book.title}}
@@ -8,4 +8,6 @@
 </ul>
 
 
-<app-books-order-list [book]="currentBook" (removeBookEvent)="addBookRemovedFromUser($event)"></app-books-order-list>
+<app-books-order-list [book]="currentBook" [userId]="userId" (removeBookEvent)="addBookRemovedFromUser($event)"></app-books-order-list>
+
+<app-books-add (bookEvent)="addBook($event)"></app-books-add>

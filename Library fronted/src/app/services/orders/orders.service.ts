@@ -47,9 +47,8 @@ export class OrderService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); 
       this.log(`${operation} failed: ${error.status} ${error.message}`);
-      return of(result as T);
+      return of(error.message as T);
     };
   }
 }

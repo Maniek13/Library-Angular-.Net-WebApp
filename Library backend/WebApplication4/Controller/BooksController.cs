@@ -78,10 +78,18 @@ namespace WebApplication4.Controller
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Book.Add(book);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBook", new { id = book.BookID }, book);
+                return CreatedAtAction("GetBook", new { id = book.BookID }, book);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new Book();
+            }
         }
 
 

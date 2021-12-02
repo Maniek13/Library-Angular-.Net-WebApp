@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {Book} from '../../interfaces/book'
 import { BooksService } from 'src/app/services/books/books.service';
 import { OrderService } from 'src/app/services/orders/orders.service';
@@ -9,7 +9,7 @@ import { OrderService } from 'src/app/services/orders/orders.service';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-
+  @Input() userId : number = 0;
   books: Book[] = [];
 
   currentBook = <Book>{};
@@ -27,7 +27,7 @@ export class BooksComponent implements OnInit {
   }
 
   addToOrder(book: Book): void {
-    this.orderService.addToOrder(1, book).subscribe();
+    this.orderService.addToOrder(this.userId, book).subscribe();
     setTimeout(()=>{
       this.books = this.books.filter(u => u !== book);
       this.currentBook = book;
@@ -37,6 +37,11 @@ export class BooksComponent implements OnInit {
 
   addBookRemovedFromUser(book: Book) {
     this.getBooks();
+  }
+
+  
+  addBook(book: Book){
+    this.books.push(book);
   }
   
 }

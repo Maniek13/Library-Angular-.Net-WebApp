@@ -23,8 +23,13 @@ export class UsersComponent implements OnInit {
 
     add(): void {
         this.usersService.addUser(this.model as User)
-          .subscribe(user => {
-            this.users.push(user);
+          .subscribe(resp => {
+            if(typeof(resp) === 'object'){
+                this.users.push(resp);
+            }
+            else{
+                alert(resp);
+            }
           });
     }
 

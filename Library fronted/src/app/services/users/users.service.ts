@@ -21,6 +21,19 @@ export class UsersService {
     );
   }
 
+  postUserLogin(login: string, password: string): Observable<any> {
+    const url = `${this.usersUrl}/login`;
+    var body = {
+      login: login,
+      password: password
+    }
+    console.log(url);
+      return this.http.post<number>(url, body, this.httpOptions).pipe(
+      tap(_ => this.log(`login user w/ ${login}`)),
+      catchError(this.handleError<User>('login'))
+    );
+  }
+
   getUser(id: number): Observable<User> {
     const url = `${this.usersUrl}/${id}`;
     return this.http.get<User>(url).pipe(
@@ -39,7 +52,7 @@ export class UsersService {
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
-      tap((newUser: User) => this.log(`added user w/ id=${user.userID}, name=${user.name}, surname=${user.surname}`)),
+      tap((newUser: User) => this.log(`added user w/ id=${newUser.userID}, name=${newUser.name}, surname=${newUser.surname}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }
@@ -76,9 +89,8 @@ export class UsersService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); 
       this.log(`${operation} failed: ${error.status} ${error.message}`);
-      return of(result as T);
+      return of(error.message as T);
     };
   }
 }
