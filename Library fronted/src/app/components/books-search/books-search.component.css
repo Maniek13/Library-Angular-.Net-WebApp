@@ -9,7 +9,16 @@ button{
     color: white;
 }
 
+span{
+    flex-grow: 100;
+}
+
 p{
     border: 1px solid white;
     padding: 10px;
+    display: flex;
+}
+
+button{
+    align-self: flex-start;
 }

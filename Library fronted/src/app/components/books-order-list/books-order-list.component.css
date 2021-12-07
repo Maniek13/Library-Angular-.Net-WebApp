@@ -7,21 +7,28 @@ button{
     float: right;
     border: 0px;
     color: white;
+    align-self: flex-start;
 }
 
 p{
     border: 1px solid white;
     padding: 10px;
     margin-right: 20px;
+    display: flex;
+}
+
+span{
+    flex-grow: 12;
 }
 
 .save-btn{
     border: 0px!important;
-    margin-right: 10px!important;
+    display: inline;
 }
 
 .save-btn button{
     border: 1px solid white;
     border-radius: 3px;
     padding: 3px 15px 3px 15px;
+    margin-right: 20px;
 }

@@ -3,7 +3,7 @@
     <p *ngFor="let book of books">
       <span class="order-book">Title: {{book.title}} <br>Auhor: {{book.author}}</span> 
       <button class="delete-from-order" title="Delete from order"
-  (click)="deleteFromOrder(book)">X</button>
+  (click)="deleteFromOrder(book)">-</button>
     </p>
 
     <p class="save-btn" >
