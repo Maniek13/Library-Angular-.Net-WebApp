@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Library.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using WebApplication4.Data;
-using WebApplication4.Models;
+using WebApplication4.DbModels;
 
 namespace WebApplication4.Controller
 {
@@ -28,7 +21,15 @@ namespace WebApplication4.Controller
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            try
+            {
+                return await _context.User.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         //get users by id
@@ -36,14 +37,21 @@ namespace WebApplication4.Controller
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
-            }
+                var user = await _context.User.FindAsync(id);
 
-            return user;
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //upate user
@@ -77,11 +85,9 @@ namespace WebApplication4.Controller
             return NoContent();
         }
 
-   
-
         //Get/create  user
         [HttpPost("login/{type}")]
-        public async Task<ActionResult<int>> PostUser(string type, UserPassword userPassword)
+        public async Task<ActionResult<int>> PostUser(string type, Models.UserPassword userPassword)
         {
             switch (type)
             {
@@ -93,7 +99,7 @@ namespace WebApplication4.Controller
             }
         }
 
-        private int ValidateUsr(UserPassword userPassword)
+        private int ValidateUsr(Models.UserPassword userPassword)
         {
             try
             {
@@ -111,12 +117,10 @@ namespace WebApplication4.Controller
             {
                 return 0;
             }
-           
         }
 
-
         //  return CreatedAtAction("GetUser", new { id = user.UserID }, user);
-        private async Task<int> CreateUser(UserPassword userPassword)
+        private async Task<int> CreateUser(Models.UserPassword userPassword)
         {
             try
             {
@@ -139,22 +143,28 @@ namespace WebApplication4.Controller
             }
         }
 
-
         //Delete user
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _context.User.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _context.User.Remove(user);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         private bool UserExists(int id)

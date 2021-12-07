@@ -20,7 +20,7 @@ export class BooksService {
     );
   }
 
-  addBook(book: iBook): Observable<any> {
+  addBook(book: iBook): Observable<iBook> {
     return this.http.post<iBook>(this.booksUrl, book, this.httpOptions).pipe(
       catchError(this.handleError<iBook>('addBook'))
     );

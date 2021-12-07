@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { iUserPassword } from 'src/app/interfaces/IUserPassword';
 import { Router } from '@angular/router';
-import { User } from 'src/app/statics/user';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ export class LoginComponent implements OnInit {
   modelReg: iUserPassword = <iUserPassword>{};
   userId : number = 0; 
   regVis : boolean = false;
-  constructor(private usersService: UsersService, private route : Router) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
   }

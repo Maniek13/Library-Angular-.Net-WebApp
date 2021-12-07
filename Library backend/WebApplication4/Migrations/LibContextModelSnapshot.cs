@@ -8,7 +8,7 @@ using WebApplication4.Data;
 
 #nullable disable
 
-namespace WebApplication4.Migrations
+namespace Library.Migrations
 {
     [DbContext(typeof(LibContext))]
     partial class LibContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace WebApplication4.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("WebApplication4.Models.Book", b =>
+            modelBuilder.Entity("WebApplication4.DbModels.Book", b =>
                 {
                     b.Property<int>("BookID")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,6 @@ namespace WebApplication4.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ISBN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -60,7 +59,7 @@ namespace WebApplication4.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("WebApplication4.Models.User", b =>
+            modelBuilder.Entity("WebApplication4.DbModels.User", b =>
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()

@@ -20,6 +20,10 @@ export class BooksAddComponent implements OnInit {
   add(): void {
     this.model.status = "free";
 
+    if(this.model.ISBN === undefined){
+      this.model.ISBN = "0";
+    }
+
     this.booksService.addBook(this.model as iBook)
       .subscribe(resp => {
         if(typeof(resp) === 'object'){

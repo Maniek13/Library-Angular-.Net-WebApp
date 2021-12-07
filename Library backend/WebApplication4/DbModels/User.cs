@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication4.Models
+namespace WebApplication4.DbModels
 {
     public class User
     {
@@ -14,5 +14,6 @@ namespace WebApplication4.Models
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
+
     }
 }

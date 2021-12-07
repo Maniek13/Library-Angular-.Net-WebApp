@@ -13,7 +13,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  postUserLogin(userPassword: iUserPassword): Observable<any> {
+  postUserLogin(userPassword: iUserPassword): Observable<number | iUser> {
     const url = `${this.usersUrl}/login/${"valid"}`;
 
       return this.http.post<number>(url, userPassword, this.httpOptions).pipe(
@@ -28,7 +28,7 @@ export class UsersService {
     );
   }
 
-  addUser(userPassword: iUserPassword): Observable<iUser> {
+  addUser(userPassword: iUserPassword): Observable<number | iUser> {
     const url = `${this.usersUrl}/login/${"create"}`;
     return this.http.post<iUser>(url, userPassword, this.httpOptions).pipe(
       catchError(this.handleError<iUser>('addUser'))

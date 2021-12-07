@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using WebApplication4.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApplication4.DbModels;
 
 namespace WebApplication4.Data
 {
@@ -14,8 +10,8 @@ namespace WebApplication4.Data
         {
         }
 
-        public DbSet<WebApplication4.Models.User> User { get; set; }
+        public DbSet<User> User { get; set; }
 
-        public DbSet<WebApplication4.Models.Book> Book { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Library.Models
+﻿namespace WebApplication4.Models
 {
     public class UserPassword
     {

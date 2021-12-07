@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
-using WebApplication4.Models;
+using WebApplication4.DbModels;
 
 namespace WebApplication4.Controller
 {
@@ -173,6 +172,7 @@ namespace WebApplication4.Controller
             {
                 Console.WriteLine(e.Message);
             }
+
             return new List<Book>();
         }
 
@@ -197,6 +197,7 @@ namespace WebApplication4.Controller
             {
                 Console.WriteLine(e.Message);
             }
+
             return new List<Book>();
         }
 

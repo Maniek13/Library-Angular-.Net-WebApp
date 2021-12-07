@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication4.Models
+namespace WebApplication4.DbModels
 {
     public class Book
     {
@@ -10,7 +10,7 @@ namespace WebApplication4.Models
         public string Title { get; set; }
         [Required]
         public string Author { get; set; }  
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
         public int? UserID { get; set; }
         [Required]
         public string Status { get; set; }
