@@ -10,6 +10,7 @@ import { OrderService } from 'src/app/services/orders/orders.service';
 export class BooksOrderListComponent implements OnInit {
   books :Book[] = [];
   orderedBooks :Book[] = [];
+  saveOrderIsVisible :boolean = false;
 
   @Input() userId : number = 0;
   @Input() book : Book = <Book>{};
@@ -20,14 +21,23 @@ export class BooksOrderListComponent implements OnInit {
   getBooks(): void {
     this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
     this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
+
+    setTimeout(()=>{   
+      if(this.books.length > 0){
+        this.saveOrderIsVisible = true;
+      }
+      else{
+        this.saveOrderIsVisible = false;
+      }
+    }, 50);
   }
   
-  ngOnInit() {
-    this.getBooks();
+  async ngOnInit() {
+    await this.getBooks();
   }
 
-  ngOnChanges() {
-    this.getBooks();
+  async ngOnChanges() {
+    await this.getBooks();
   }
 
   deleteFromOrder(book : Book){
@@ -35,6 +45,10 @@ export class BooksOrderListComponent implements OnInit {
     setTimeout(()=>{   
       this.books = this.books.filter(u => u !== book);
       this.removeBookEvent.emit(book);
+
+      if(this.books.length <= 0){
+        this.saveOrderIsVisible = false;
+      }
     }, 200);
   }
 
@@ -42,8 +56,7 @@ export class BooksOrderListComponent implements OnInit {
   saveOrder(){
     this.orderService.saveOrder(this.userId).subscribe();
     setTimeout(()=>{   
-      this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
-      this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
+      this.getBooks();
     }, 200);
   }
 }

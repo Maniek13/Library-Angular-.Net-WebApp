@@ -77,28 +77,63 @@ namespace WebApplication4.Controller
             return NoContent();
         }
 
-        //Add user
-        // POST: api/Users
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
+   
 
-            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+        //Get/create  user
+        [HttpPost("login/{type}")]
+        public async Task<ActionResult<int>> PostUser(string type, UserPassword userPassword)
+        {
+            switch (type)
+            {
+                case ("valid"):
+                    return ValidateUsr(userPassword);
+                case ("create"):
+                    return await CreateUser(userPassword);
+                default: return NotFound();
+            }
         }
 
-        //Valid user
-        [HttpPost("login")]
-        public ActionResult<int> PostUser([FromBody] UserPassword userPassword)
+        private int ValidateUsr(UserPassword userPassword)
         {
-
-            User user = _context.User.FirstOrDefault(u => u.Login == userPassword.Login && u.Password == userPassword.Password);
-            if (user != null)
+            try
             {
+                User user = _context.User.FirstOrDefault(u => u.Login == userPassword.Login && u.Password == userPassword.Password);
+                if (user != null)
+                {
+                    return user.UserID;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+           
+        }
+
+
+        //  return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+        private async Task<int> CreateUser(UserPassword userPassword)
+        {
+            try
+            {
+                User user = new User
+                {
+                    Login = userPassword.Login,
+                    Password = userPassword.Password,
+                    Name = "no name",
+                    Surname = "no surname"
+                };
+
+                _context.User.Add(user);
+                await _context.SaveChangesAsync();
+
                 return user.UserID;
             }
-            else
+            catch(Exception ex)
             {
                 return 0;
             }

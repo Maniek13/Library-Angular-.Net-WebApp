@@ -7,7 +7,7 @@
     </p>
 
     <p class="save-btn" >
-      <button title="Save books" (click)="saveOrder()">Save</button>
+      <button title="Save books" (click)="saveOrder()" [style.visibility]="saveOrderIsVisible ? 'visible' : 'hidden'" >Save</button>
     </p>
 
 </div>

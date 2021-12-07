@@ -3,6 +3,7 @@ import { User } from '../../interfaces/iUser';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
+import { UserPassword } from 'src/app/interfaces/IUserPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,10 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  postUserLogin(login: string, password: string): Observable<any> {
-    const url = `${this.usersUrl}/login`;
-    var body = {
-      login: login,
-      password: password
-    }
-      return this.http.post<number>(url, body, this.httpOptions).pipe(
+  postUserLogin(userPassword: UserPassword): Observable<any> {
+    const url = `${this.usersUrl}/login/${"valid"}`;
+
+      return this.http.post<number>(url, userPassword, this.httpOptions).pipe(
       catchError(this.handleError<User>('login'))
     );
   }
@@ -30,8 +28,10 @@ export class UsersService {
     );
   }
 
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
+  addUser(userPassword: UserPassword): Observable<User> {
+    const url = `${this.usersUrl}/login/${"create"}`;
+    
+    return this.http.post<User>(url, userPassword, this.httpOptions).pipe(
       catchError(this.handleError<User>('addUser'))
     );
   }

@@ -11,6 +11,7 @@ button{
 
 span{
     flex-grow: 100;
+    word-break: break-word;
 }
 
 p{

@@ -9,6 +9,7 @@ h2, span{
     top:125px;
     display: flex;
     border-top: 1px solid white;
+    border-bottom: 1px solid white;
     height: calc(100% - 126px);
 }
 
@@ -20,14 +21,12 @@ h2, span{
     top: 90px;
 }
 
-.events-log{
-    height: 100px;
-}
 
 .books-list{
     height: 100%;;
     order:2;
     flex-basis: calc(100% - 700px);
+    overflow: auto;
 }
 .search{
     order: 1;
@@ -38,6 +37,7 @@ h2, span{
     display: flex;
     flex-flow: column;
     padding-right: 50px;
+    overflow: auto;
 }
 
 .order-list{
@@ -46,6 +46,7 @@ h2, span{
     border-left: 1px solid white;
     margin-left: 100px;
     padding-left: 50px;
+    overflow: auto;
 }
 
 button{
@@ -58,11 +59,28 @@ button{
 p{
     border: 1px solid white;
     padding: 10px;
-    position: relative;
+    display: flex;
+}
+
+span{
+    flex-grow: 100;
+    word-break: break-word;
 }
 
 .books button{
-    position: absolute;
-    top: 35%;
-    right: 10px;
+    align-self: flex-start;
+}
+
+::-webkit-scrollbar { 
+    -webkit-appearance:none; 
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background:transparent; 
+}
+::-webkit-scrollar-thumb {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: white; 
 }

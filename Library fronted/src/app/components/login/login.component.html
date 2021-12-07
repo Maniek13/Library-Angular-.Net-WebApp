@@ -1,19 +1,27 @@
 <app-main class="main" *ngIf="userId" [userId]="userId"></app-main>
 
+<div class="reg-comp" [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
+  <div>
+    <button class="regBtn" (click)="regVisibleChangeBtn()" >Register</button>
+  </div>
+  
+</div>
+
+
 <div class="login-comp" [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
     <h1>Login to your profile</h1>
 
     <div class="form-group">
       
       <div class="field">
-        <div class="label">Title: </div>
+        <div class="label">Login: </div>
         <div class="input">
           <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" placeholder="login"/>
         </div>
         
       </div>
       <div class="field">
-        <div class="label">Author: </div>
+        <div class="label">Password: </div>
         <div class="input">
           <input type="text" class="form-control" id="password" required [(ngModel)]="model.password" placeholder="password"/>
         </div>
@@ -24,6 +32,35 @@
       </button>
 
     </div>
+</div>
+
+
+
+
+<div class="register-comp" [style.visibility]="(regVis === true && userId === 0) ? 'visible' : 'hidden' ">
+  <div>Create profile</div>
+
+  <div class="form-group">
+    
+    <div class="field">
+      <div class="label">Login: </div>
+      <div class="input">
+        <input type="text" class="form-control" id="login" required [(ngModel)]="modelReg.login" placeholder="login"/>
+      </div>
+      
+    </div>
+    <div class="field">
+      <div class="label">Password: </div>
+      <div class="input">
+        <input type="text" class="form-control" id="password" required [(ngModel)]="modelReg.password" placeholder="password"/>
+      </div>
+    </div>
+
+    <button class="register" (click)="register();">
+      Register
+    </button>
+
+  </div>
 </div>
 
 

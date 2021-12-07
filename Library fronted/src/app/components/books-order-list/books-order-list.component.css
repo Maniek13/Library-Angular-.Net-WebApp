@@ -18,7 +18,8 @@ p{
 }
 
 span{
-    flex-grow: 12;
+    flex-grow: 100;
+    word-break: break-word;
 }
 
 .save-btn{
