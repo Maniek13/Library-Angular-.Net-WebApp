@@ -1,13 +1,23 @@
-<h2>Books List{{userId}}</h2>
-<ul class="books">
-  <li *ngFor="let book of books">
-      <span class="badge">{{book.bookID}}</span> {{book.title}}
-    <button class="add-to-list" title="Add to order"
-  (click)="addToOrder(book)">+</button>
-  </li>
-</ul>
+<div class="books-comp">
+  <div class="books-list">
+    <h2>Books List</h2>
 
+    <div class="books">
+      <p *ngFor="let book of books">
+          <span class="badge">Title: {{book.title}} <br>Auhor: {{book.author}}</span> 
+        <button class="add-to-list" title="Add to order"
+      (click)="addToOrder(book)">+</button>
+      </p>
+    </div>
+  </div>
+  
+  <app-books-search class="search" (addBookEvt)="addItem($event)"></app-books-search>
+  
 
-<app-books-order-list [book]="currentBook" [userId]="userId" (removeBookEvent)="addBookRemovedFromUser($event)"></app-books-order-list>
+  <app-books-order-list class="order-list" [book]="currentBook" [userId]="userId" (removeBookEvent)="addBookRemovedFromUser($event)"></app-books-order-list>
 
-<app-books-add (bookEvent)="addBook($event)"></app-books-add>
+  
+</div>
+
+<app-books-add class="books-add" (bookEvent)="addBook($event)"></app-books-add>
+

@@ -1,6 +1,6 @@
-<app-main *ngIf="userId" [userId]="userId"></app-main>
+<app-main class="main" *ngIf="userId" [userId]="userId"></app-main>
 
-<div [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
+<div class="login-comp" [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
     <h1>Login to your profile</h1>
 
     <div class="form-group">

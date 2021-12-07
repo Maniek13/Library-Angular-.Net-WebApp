@@ -1,0 +1,15 @@
+h2, span{
+    color: white;
+}
+
+button{
+    background-color: transparent;
+    float: right;
+    border: 0px;
+    color: white;
+}
+
+p{
+    border: 1px solid white;
+    padding: 10px;
+}

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../../interfaces/book';
-import { catchError, Observable, of, tap } from 'rxjs';
-import { MessageService } from '../messages/message.service';
+import { Book } from '../../interfaces/iBook';
+import { catchError, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -10,13 +9,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class OrderService {
   private orderUrl = 'https://localhost:7216/api/orders'
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
 
   getOrder(userId: number): Observable<Book[]> {
-    const url = `${this.orderUrl}/userId/${userId}`;
+    const url = `${this.orderUrl}/userId/${userId}&${"peeding"}`;
     return this.http.get<Book[]>(url)
     .pipe(
-      tap(_ => this.log(`fetched order for id=${userId}`)),
+      catchError(this.handleError<Book[]>('getBooks', []))
+    );
+  }
+
+  
+  getOrderedList(userId: number): Observable<Book[]> {
+
+    const url = `${this.orderUrl}/userId/${userId}&${"ordered"}`;
+    console.log(url)
+    return this.http.get<Book[]>(url)
+    .pipe(
       catchError(this.handleError<Book[]>('getBooks', []))
     );
   }
@@ -24,21 +33,22 @@ export class OrderService {
   addToOrder(userId: number, book: Book): Observable<Book> {
     const url = `${this.orderUrl}/userId/${userId}`;
     return this.http.post<Book>(url, book, this.httpOptions).pipe(
-      tap(_ => this.log(`added book to order for ${userId}`)),
       catchError(this.handleError<Book>('addToOrder'))
     );
   }
 
   deleteFromOrder(id: number): Observable<Book> {
-    const url = `${this.orderUrl}/${id}`;
-    return this.http.delete<Book>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`delete book from order book id: ${id}`)),
+    const url = `${this.orderUrl}/delete/${id}`;
+    return this.http.put<Book>(url, this.httpOptions).pipe(
       catchError(this.handleError<Book>('delBook'))
     );
   }
 
-  private log(message: string) {
-    this.messageService.add(`UserService: ${message}`);
+  saveOrder(userId: number): Observable<Book> {
+    const url = `${this.orderUrl}/set/${userId}&${"order"}`;
+    return this.http.put<Book>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Book>('addToOrder'))
+    );
   }
 
   httpOptions = {
@@ -47,7 +57,7 @@ export class OrderService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      this.log(`${operation} failed: ${error.status} ${error.message}`);
+      console.log(`${operation} failed: ${error.status} ${error.message}`);
       return of(error.message as T);
     };
   }

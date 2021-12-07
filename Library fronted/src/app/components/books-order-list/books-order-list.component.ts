@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Book } from 'src/app/interfaces/book';
+import { Book } from 'src/app/interfaces/iBook';
 import { OrderService } from 'src/app/services/orders/orders.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/services/orders/orders.service';
 })
 export class BooksOrderListComponent implements OnInit {
   books :Book[] = [];
+  orderedBooks :Book[] = [];
 
   @Input() userId : number = 0;
   @Input() book : Book = <Book>{};
@@ -18,6 +19,7 @@ export class BooksOrderListComponent implements OnInit {
 
   getBooks(): void {
     this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
+    this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
   }
   
   ngOnInit() {
@@ -33,6 +35,15 @@ export class BooksOrderListComponent implements OnInit {
     setTimeout(()=>{   
       this.books = this.books.filter(u => u !== book);
       this.removeBookEvent.emit(book);
-    }, 100);
+    }, 200);
+  }
+
+
+  saveOrder(){
+    this.orderService.saveOrder(this.userId).subscribe();
+    setTimeout(()=>{   
+      this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
+      this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
+    }, 200);
   }
 }

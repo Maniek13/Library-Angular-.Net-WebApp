@@ -1,9 +1,21 @@
-<h2>Order</h2>
-<ul class="books">
-    <li *ngFor="let book of books">
-      <span class="order-book">{{book.bookID}}</span> {{book.title}}
+<h2>Your curend order</h2>
+<div class="books">
+    <p *ngFor="let book of books">
+      <span class="order-book">Title: {{book.title}} <br>Auhor: {{book.author}}</span> 
       <button class="delete-from-order" title="Delete from order"
   (click)="deleteFromOrder(book)">X</button>
-    </li>
-</ul>
+    </p>
+
+    <p class="save-btn" >
+      <button title="Save books" (click)="saveOrder()">Save</button>
+    </p>
+
+</div>
+
+<h2>Ordered books</h2>
+<div class="books">
+  <p *ngFor="let orderedBook of orderedBooks">
+    <span class="order-book">Title: {{orderedBook.title}} <br>Auhor: {{orderedBook.author}}</span> 
+  </p>
+</div>
 

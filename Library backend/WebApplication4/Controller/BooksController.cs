@@ -29,7 +29,7 @@ namespace WebApplication4.Controller
             return _context.Book.Where(el => !el.UserID.HasValue|| el.UserID == 0).ToList();
         }
 
-        //Get book
+        //Get book by id
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
@@ -44,6 +44,22 @@ namespace WebApplication4.Controller
             return book;
         }
 
+        //Search book
+        // PUT: api/Books/name/xxx
+        [HttpGet("search/{name}")]
+        public async Task<ActionResult<List<Book>>> GetBook(string name)
+        {
+            var books = _context.Book.Where(u => (u.Author.Contains(name) || u.Title.Contains(name)) && u.Status == "free").ToList();
+
+            if (books == null)
+            {
+                return NotFound();
+            }
+
+            return (List<Book>)books;
+        }
+
+        //Update book
         // PUT: api/Books/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBook(int id, Book book)
@@ -74,6 +90,7 @@ namespace WebApplication4.Controller
             return NoContent();
         }
 
+        //Add book
         // POST: api/Books
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
@@ -92,7 +109,7 @@ namespace WebApplication4.Controller
             }
         }
 
-
+        //Delete book
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)

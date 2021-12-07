@@ -23,6 +23,7 @@ namespace WebApplication4.Controller
             _context = context;
         }
 
+        //Get users
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -30,6 +31,7 @@ namespace WebApplication4.Controller
             return await _context.User.ToListAsync();
         }
 
+        //get users by id
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
@@ -44,21 +46,8 @@ namespace WebApplication4.Controller
             return user;
         }
 
-        [HttpGet("name/{name}")]
-        public async Task<ActionResult<List<User>>> GetUser(string name)
-        {
-            var user =  _context.User.Where(u => u.Name.Contains(name)).ToList();
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return (List<User>)user;
-        }
-
+        //upate user
         // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -88,6 +77,7 @@ namespace WebApplication4.Controller
             return NoContent();
         }
 
+        //Add user
         // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -98,6 +88,7 @@ namespace WebApplication4.Controller
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
 
+        //Valid user
         [HttpPost("login")]
         public ActionResult<int> PostUser([FromBody] UserPassword userPassword)
         {
@@ -114,7 +105,7 @@ namespace WebApplication4.Controller
         }
 
 
-
+        //Delete user
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)

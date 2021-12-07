@@ -1,0 +1,10 @@
+<h2>Books Search</h2>
+
+<input  id="search-box" (input)="search(name)" placeholder="search" [(ngModel)]="name"/>
+
+<div class="search-result">
+  <p *ngFor="let book of books$ | async" >
+    <span class="order-book">Title: {{book.title}} <br>Auhor: {{book.author}}</span> 
+    <button (click)="addToOrder(book)">+</button>
+  </p>
+</div>

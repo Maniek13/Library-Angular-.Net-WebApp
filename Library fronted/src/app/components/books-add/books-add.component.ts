@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Book } from 'src/app/interfaces/book';
+import { Book } from 'src/app/interfaces/iBook';
 import { BooksService } from 'src/app/services/books/books.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class BooksAddComponent implements OnInit {
   }
 
   add(): void {
-    this.model.status = "new";
+    this.model.status = "free";
 
     this.booksService.addBook(this.model as Book)
       .subscribe(resp => {

@@ -1,0 +1,61 @@
+
+h2, span{
+    color: white;
+}
+
+.books-comp{
+    width: 100%;
+    position: absolute;
+    top:125px;
+    display: flex;
+    border-top: 1px solid white;
+    height: calc(100% - 126px);
+}
+
+.books-add{
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    top: 90px;
+}
+
+.events-log{
+    height: 100px;
+}
+
+.books-list{
+    height: 100%;;
+    order:2;
+    flex-basis: calc(100% - 700px);
+}
+.search{
+    order: 1;
+    flex-basis: 250px;
+    border-right: 1px solid white;
+    margin-right: 100px;
+    padding-left: 50px;
+    display: flex;
+    flex-flow: column;
+    padding-right: 50px;
+}
+
+.order-list{
+    order: 3;
+    flex-basis: 250px;
+    border-left: 1px solid white;
+    margin-left: 100px;
+    padding-left: 50px;
+}
+
+button{
+    background-color: transparent;
+    float: right;
+    border: 0px;
+    color: white;
+}
+
+p{
+    border: 1px solid white;
+    padding: 10px;
+}

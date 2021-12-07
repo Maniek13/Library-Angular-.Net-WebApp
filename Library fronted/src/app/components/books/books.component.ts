@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import {Book} from '../../interfaces/book'
+import {Book} from '../../interfaces/iBook'
 import { BooksService } from 'src/app/services/books/books.service';
 import { OrderService } from 'src/app/services/orders/orders.service';
 
@@ -32,7 +32,6 @@ export class BooksComponent implements OnInit {
       this.books = this.books.filter(u => u !== book);
       this.currentBook = book;
     }, 100);
-
   }
 
   addBookRemovedFromUser(book: Book) {
@@ -42,6 +41,12 @@ export class BooksComponent implements OnInit {
   
   addBook(book: Book){
     this.books.push(book);
+  }
+
+  addItem(book: Book) {
+    let index = this.books.indexOf(book)
+    this.books.splice(index, 1);
+    this.addToOrder(book);
   }
   
 }

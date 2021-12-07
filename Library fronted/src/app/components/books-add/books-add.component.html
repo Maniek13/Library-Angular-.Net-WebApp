@@ -1,17 +1,18 @@
-<h2>Add new book</h2>
 
-<div class="form-group">
-  
-  <label for="title">Title: </label>
-  <input type="text" class="form-control" id="title" required [(ngModel)]="model.title"/>
-  <label for="author">Author: </label>
-  <input type="text" class="form-control" id="author" required [(ngModel)]="model.author"/>
-  <label for="ISBN">ISBN: </label>
-  <input type="text" class="form-control" id="ISBN" [(ngModel)]="model.ISBN"/>
-
-  <button class="add-button" (click)="add();">
-    Add book
-  </button>
+<div class="add-book">
+  <div class="form-group">
+    
+    <label for="title">Title: </label>
+    <input type="text" id="title" required [(ngModel)]="model.title" placeholder="title"/>
+    <label for="author">Author: </label>
+    <input type="text" id="author" required [(ngModel)]="model.author" placeholder="author"/>
+    <label for="ISBN">ISBN: </label>
+    <input type="text" id="ISBN" [(ngModel)]="model.ISBN" placeholder="isbn"/>
+    
+    <button class="add-button" (click)="add();">+</button>
+    
+  </div>
+    
 </div>
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/interfaces/iUser';
 import { UsersService } from 'src/app/services/users/users.service';
 import {Router} from '@angular/router';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         this.userId = resp;
       }
       else{
-          alert(resp);
+          alert("Wrong data");
       }
     });
   }

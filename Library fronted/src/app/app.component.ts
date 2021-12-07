@@ -10,5 +10,7 @@ export class AppComponent {
 
   constructor(){
     document.body.style.background = "rgb(29,29,29)";
+    document.body.style.padding = "0";
+    document.body.style.margin = "0";
   }
 }

@@ -1,6 +1,20 @@
 div{
     color: white;
 }
+
+.main{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.login-comp{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 .form-group{
     display: block;
     position: relative;
