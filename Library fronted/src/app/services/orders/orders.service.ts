@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../../interfaces/iBook';
+import { iBook } from '../../interfaces/iBook';
 import { catchError, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -11,41 +11,40 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  getOrder(userId: number): Observable<Book[]> {
+  getOrder(userId: number): Observable<iBook[]> {
     const url = `${this.orderUrl}/userId/${userId}&${"peeding"}`;
-    return this.http.get<Book[]>(url)
+    return this.http.get<iBook[]>(url)
     .pipe(
-      catchError(this.handleError<Book[]>('getBooks', []))
+      catchError(this.handleError<iBook[]>('getBooks', []))
     );
   }
-
   
-  getOrderedList(userId: number): Observable<Book[]> {
+  getOrderedList(userId: number): Observable<iBook[]> {
     const url = `${this.orderUrl}/userId/${userId}&${"ordered"}`;
-    return this.http.get<Book[]>(url)
+    return this.http.get<iBook[]>(url)
     .pipe(
-      catchError(this.handleError<Book[]>('getBooks', []))
+      catchError(this.handleError<iBook[]>('getBooks', []))
     );
   }
 
-  addToOrder(userId: number, book: Book): Observable<Book> {
+  addToOrder(userId: number, book: iBook): Observable<iBook> {
     const url = `${this.orderUrl}/userId/${userId}`;
-    return this.http.post<Book>(url, book, this.httpOptions).pipe(
-      catchError(this.handleError<Book>('addToOrder'))
+    return this.http.post<iBook>(url, book, this.httpOptions).pipe(
+      catchError(this.handleError<iBook>('addToOrder'))
     );
   }
 
-  deleteFromOrder(id: number): Observable<Book> {
+  deleteFromOrder(id: number): Observable<iBook> {
     const url = `${this.orderUrl}/delete/${id}`;
-    return this.http.put<Book>(url, this.httpOptions).pipe(
-      catchError(this.handleError<Book>('delBook'))
+    return this.http.put<iBook>(url, this.httpOptions).pipe(
+      catchError(this.handleError<iBook>('delBook'))
     );
   }
 
-  saveOrder(userId: number): Observable<Book> {
+  saveOrder(userId: number): Observable<iBook> {
     const url = `${this.orderUrl}/set/${userId}&${"order"}`;
-    return this.http.put<Book>(url, this.httpOptions).pipe(
-      catchError(this.handleError<Book>('addToOrder'))
+    return this.http.put<iBook>(url, this.httpOptions).pipe(
+      catchError(this.handleError<iBook>('addToOrder'))
     );
   }
 

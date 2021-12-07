@@ -1,4 +1,4 @@
-export interface Book {
+export interface iBook {
     bookID: number;
     title: string;
     author: string;

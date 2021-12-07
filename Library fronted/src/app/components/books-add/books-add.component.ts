@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Book } from 'src/app/interfaces/iBook';
+import { iBook } from 'src/app/interfaces/iBook';
 import { BooksService } from 'src/app/services/books/books.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { BooksService } from 'src/app/services/books/books.service';
   styleUrls: ['./books-add.component.css']
 })
 export class BooksAddComponent implements OnInit {
-  model: Book = <Book>{};
+  model: iBook = <iBook>{};
 
-  @Output() bookEvent = new EventEmitter<Book>();
+  @Output() bookEvent = new EventEmitter<iBook>();
 
   constructor(private booksService: BooksService) { }
   
@@ -20,7 +20,7 @@ export class BooksAddComponent implements OnInit {
   add(): void {
     this.model.status = "free";
 
-    this.booksService.addBook(this.model as Book)
+    this.booksService.addBook(this.model as iBook)
       .subscribe(resp => {
         if(typeof(resp) === 'object'){
           this.bookEvent.emit(resp);

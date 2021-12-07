@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Book } from 'src/app/interfaces/iBook';
+import { iBook } from 'src/app/interfaces/iBook';
 import { OrderService } from 'src/app/services/orders/orders.service';
 
 @Component({
@@ -8,13 +8,13 @@ import { OrderService } from 'src/app/services/orders/orders.service';
   styleUrls: ['./books-order-list.component.css']
 })
 export class BooksOrderListComponent implements OnInit {
-  books :Book[] = [];
-  orderedBooks :Book[] = [];
+  books :iBook[] = [];
+  orderedBooks :iBook[] = [];
   saveOrderIsVisible :boolean = false;
 
   @Input() userId : number = 0;
-  @Input() book : Book = <Book>{};
-  @Output() removeBookEvent = new EventEmitter<Book>();
+  @Input() book : iBook = <iBook>{};
+  @Output() removeBookEvent = new EventEmitter<iBook>();
 
   constructor(private orderService: OrderService) { }
 
@@ -40,7 +40,7 @@ export class BooksOrderListComponent implements OnInit {
     await this.getBooks();
   }
 
-  deleteFromOrder(book : Book){
+  deleteFromOrder(book : iBook){
     this.orderService.deleteFromOrder(book.bookID).subscribe();
     setTimeout(()=>{   
       this.books = this.books.filter(u => u !== book);

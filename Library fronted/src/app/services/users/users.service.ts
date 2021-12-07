@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../interfaces/iUser';
+import { iUser } from '../../interfaces/iUser';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { UserPassword } from 'src/app/interfaces/IUserPassword';
+import { catchError } from 'rxjs/operators';
+import { iUserPassword } from 'src/app/interfaces/IUserPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +13,25 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  postUserLogin(userPassword: UserPassword): Observable<any> {
+  postUserLogin(userPassword: iUserPassword): Observable<any> {
     const url = `${this.usersUrl}/login/${"valid"}`;
 
       return this.http.post<number>(url, userPassword, this.httpOptions).pipe(
-      catchError(this.handleError<User>('login'))
+      catchError(this.handleError<iUser>('login'))
     );
   }
 
-  getUser(id: number): Observable<User> {
+  getUser(id: number): Observable<iUser> {
     const url = `${this.usersUrl}/${id}`;
-    return this.http.get<User>(url).pipe(
-      catchError(this.handleError<User>(`getUser id=${id}`))
+    return this.http.get<iUser>(url).pipe(
+      catchError(this.handleError<iUser>(`getUser id=${id}`))
     );
   }
 
-  addUser(userPassword: UserPassword): Observable<User> {
+  addUser(userPassword: iUserPassword): Observable<iUser> {
     const url = `${this.usersUrl}/login/${"create"}`;
-    
-    return this.http.post<User>(url, userPassword, this.httpOptions).pipe(
-      catchError(this.handleError<User>('addUser'))
+    return this.http.post<iUser>(url, userPassword, this.httpOptions).pipe(
+      catchError(this.handleError<iUser>('addUser'))
     );
   }
 

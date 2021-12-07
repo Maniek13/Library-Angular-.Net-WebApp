@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../../interfaces/iBook';
+import { iBook } from '../../interfaces/iBook';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -13,26 +13,26 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.booksUrl)
+  getBooks(): Observable<iBook[]> {
+    return this.http.get<iBook[]>(this.booksUrl)
     .pipe(
-      catchError(this.handleError<Book[]>('getBooks', []))
+      catchError(this.handleError<iBook[]>('getBooks', []))
     );
   }
 
-  addBook(book: Book): Observable<any> {
-    return this.http.post<Book>(this.booksUrl, book, this.httpOptions).pipe(
-      catchError(this.handleError<Book>('addBook'))
+  addBook(book: iBook): Observable<any> {
+    return this.http.post<iBook>(this.booksUrl, book, this.httpOptions).pipe(
+      catchError(this.handleError<iBook>('addBook'))
     );
   }
 
-  searchBooks(term: string): Observable<Book[]> {
+  searchBooks(term: string): Observable<iBook[]> {
     if (!term.trim()) {
       return of([]);
     }
     const url = `${this.booksUrl}/search/${term}`;
-    return this.http.get<Book[]>(url).pipe(
-      catchError(this.handleError<Book[]>('searchBooks', []))
+    return this.http.get<iBook[]>(url).pipe(
+      catchError(this.handleError<iBook[]>('searchBooks', []))
     );
   }
 

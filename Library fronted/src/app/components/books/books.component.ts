@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import {Book} from '../../interfaces/iBook'
+import {iBook} from '../../interfaces/iBook'
 import { BooksService } from 'src/app/services/books/books.service';
 import { OrderService } from 'src/app/services/orders/orders.service';
 
@@ -10,11 +10,11 @@ import { OrderService } from 'src/app/services/orders/orders.service';
 })
 export class BooksComponent implements OnInit {
   @Input() userId : number = 0;
-  books: Book[] = [];
+  books: iBook[] = [];
 
-  currentBook = <Book>{};
+  currentBook = <iBook>{};
 
-  @Output() messageEvent = new EventEmitter<Book>();
+  @Output() messageEvent = new EventEmitter<iBook>();
 
   constructor(private booksService: BooksService, private orderService : OrderService) { }
 
@@ -26,7 +26,7 @@ export class BooksComponent implements OnInit {
     this.getBooks();
   }
 
-  addToOrder(book: Book): void {
+  addToOrder(book: iBook): void {
     this.orderService.addToOrder(this.userId, book).subscribe();
     setTimeout(()=>{
       this.books = this.books.filter(u => u !== book);
@@ -34,16 +34,16 @@ export class BooksComponent implements OnInit {
     }, 100);
   }
 
-  addBookRemovedFromUser(book: Book) {
+  addBookRemovedFromUser(book: iBook) {
     this.getBooks();
   }
 
   
-  addBook(book: Book){
+  addBook(book: iBook){
     this.books.push(book);
   }
 
-  addItem(book: Book) {
+  addItem(book: iBook) {
     let index = this.books.indexOf(book)
     this.books.splice(index, 1);
     this.addToOrder(book);

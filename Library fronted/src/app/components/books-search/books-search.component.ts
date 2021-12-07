@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Book } from 'src/app/interfaces/iBook';
+import { iBook } from 'src/app/interfaces/iBook';
 import { Observable, Subject } from 'rxjs';
 import { BooksService } from 'src/app/services/books/books.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-books-search',
@@ -11,10 +10,10 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./books-search.component.css']
 })
 export class BooksSearchComponent implements OnInit {
-  books$!: Observable<Book[]>;
+  books$!: Observable<iBook[]>;
   name = ""
 
-  @Output() addBookEvt = new EventEmitter<Book>();
+  @Output() addBookEvt = new EventEmitter<iBook>();
 
   private searchTerms = new Subject<string>();
 
@@ -32,7 +31,7 @@ export class BooksSearchComponent implements OnInit {
     );
   }
 
-  addToOrder(book: Book) {
+  addToOrder(book: iBook) {
     this.addBookEvt.emit(book);
     this.search("");
     this.name = '';
