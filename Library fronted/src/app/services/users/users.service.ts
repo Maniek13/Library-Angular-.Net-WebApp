@@ -18,7 +18,6 @@ export class UsersService {
       login: login,
       password: password
     }
-    console.log(url);
       return this.http.post<number>(url, body, this.httpOptions).pipe(
       catchError(this.handleError<User>('login'))
     );

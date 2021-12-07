@@ -21,9 +21,7 @@ export class OrderService {
 
   
   getOrderedList(userId: number): Observable<Book[]> {
-
     const url = `${this.orderUrl}/userId/${userId}&${"ordered"}`;
-    console.log(url)
     return this.http.get<Book[]>(url)
     .pipe(
       catchError(this.handleError<Book[]>('getBooks', []))
