@@ -19,17 +19,20 @@ export class BooksOrderListComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   getBooks(): void {
-    this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
-    this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
-
-    setTimeout(()=>{   
-      if(this.books.length > 0){
-        this.saveOrderIsVisible = true;
-      }
-      else{
-        this.saveOrderIsVisible = false;
-      }
-    }, 50);
+    if(this.userId !== 0){
+      this.orderService.getOrder(this.userId).subscribe(books => this.books = books);
+      this.orderService.getOrderedList(this.userId).subscribe(books => this.orderedBooks = books);
+  
+      setTimeout(()=>{   
+        if(this.books.length > 0){
+          this.saveOrderIsVisible = true;
+        }
+        else{
+          this.saveOrderIsVisible = false;
+        }
+      }, 50);
+    }
+    
   }
   
   async ngOnInit() {

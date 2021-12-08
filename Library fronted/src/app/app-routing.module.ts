@@ -5,8 +5,9 @@ import { MainComponent } from './components/main/main.component';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'index', component: LoginComponent },
-  { path: '', redirectTo: '/index', pathMatch: 'full' }
+  { path: 'main', component: MainComponent }
 ];
 
 

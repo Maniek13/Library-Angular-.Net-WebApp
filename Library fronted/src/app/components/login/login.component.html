@@ -1,6 +1,5 @@
-<app-main class="main" *ngIf="userId" [userId]="userId"></app-main>
 
-<div class="reg-comp" [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
+<div class="reg-comp" >
   <div>
     <button class="regBtn" (click)="regVisibleChangeBtn()" >Register</button>
   </div>
@@ -8,7 +7,7 @@
 </div>
 
 
-<div class="login-comp" [style.visibility]="(userId !== 0) ? 'hidden' : 'visible' ">
+<div class="login-comp">
     <h1>Login to your profile</h1>
 
     <div class="form-group">
@@ -36,8 +35,7 @@
 
 
 
-
-<div class="register-comp" [style.visibility]="(regVis === true && userId === 0) ? 'visible' : 'hidden' ">
+<div class="register-comp" [style.visibility]="(regVis === true) ? 'visible' : 'hidden' ">
   <div>Create profile</div>
 
   <div class="form-group">

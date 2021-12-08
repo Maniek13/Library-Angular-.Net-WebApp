@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { iUserPassword } from 'src/app/interfaces/IUserPassword';
 import { Router } from '@angular/router';
+import { staticVariables } from 'src/app/statics/staticVariables';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,20 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   model: iUserPassword = <iUserPassword>{};
   modelReg: iUserPassword = <iUserPassword>{};
-  userId : number = 0; 
   regVis : boolean = false;
-  constructor(private usersService: UsersService) { }
+
+  constructor(private usersService: UsersService, private route: Router) { }
 
   ngOnInit(): void {
+
   }
   
   login(): void {
     this.usersService.postUserLogin(this.model)
     .subscribe(resp => {
       if(typeof(resp) === 'number' && resp !== 0){
-        this.userId = resp;
+        staticVariables.userId = resp;
+        this.route.navigate(['main'])
       }
       else{
           alert("Wrong data");
@@ -38,7 +41,8 @@ export class LoginComponent implements OnInit {
     this.usersService.addUser(this.modelReg)
     .subscribe(resp => {
       if(typeof(resp) === 'number' && resp !== 0){
-        this.userId = resp;
+        staticVariables.userId = resp;
+        this.route.navigate(['main'])
       }
       else{
           alert("Wrong data");

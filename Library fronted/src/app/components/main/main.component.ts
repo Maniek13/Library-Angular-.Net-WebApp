@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { staticVariables } from 'src/app/statics/staticVariables';
 
 @Component({
   selector: 'app-main',
@@ -6,12 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  @Input() userId : number = 0;
-  constructor() {
+  userId : number = staticVariables.userId;
+  
+  constructor(private route: Router) {
   }
 
   ngOnInit(): void {
-    
+    if(staticVariables.userId <= 0){
+      this.route.navigate(['index'])
+    }
+    else{
+      this.userId = staticVariables.userId;
+    }
   }
 
 }

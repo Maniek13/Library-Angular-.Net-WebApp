@@ -19,7 +19,10 @@ export class BooksComponent implements OnInit {
   constructor(private booksService: BooksService, private orderService : OrderService) { }
 
   getBooks(): void {
-    this.booksService.getBooks().subscribe(books => this.books = books);
+    if(this.userId !== 0){
+      this.booksService.getBooks().subscribe(books => this.books = books);
+    }
+   
   }
 
   ngOnInit() {
