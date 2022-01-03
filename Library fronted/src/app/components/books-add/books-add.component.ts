@@ -27,10 +27,15 @@ export class BooksAddComponent implements OnInit {
     this.booksService.addBook(this.model as iBook)
       .subscribe(resp => {
         if(typeof(resp) === 'object'){
+
+          this.model.ISBN = "";
+          this.model.author = "";
+          this.model.title = "";
+
           this.bookEvent.emit(resp);
         }
         else{
-          alert(resp);
+          alert("Add book error. Fill all required fields");
         }
       });
   }

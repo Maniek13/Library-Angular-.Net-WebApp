@@ -73,12 +73,20 @@ namespace WebApplication4.Controller
             {
                 if (userId > 0)
                 {
-                    book.UserID = userId;
-                    book.Status = "peeding";
-                    _context.Book.Update(book);
-                    await _context.SaveChangesAsync();
+                    book = _context.Book.First(el => el.BookID == book.BookID);
 
-                    return book;
+                    if(book.Status == "free")
+                    {
+                        book.UserID = userId;
+                        book.Status = "peeding";
+                        _context.Book.Update(book);
+                        await _context.SaveChangesAsync();
+
+                        return book;
+                    }
+
+                    return NotFound();
+                    
                 }
                 else
                 {
