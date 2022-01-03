@@ -100,7 +100,7 @@ namespace WebApplication4.Controller
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return new Book();
+                return BadRequest();
             }
         }
 

@@ -19,28 +19,35 @@ export class BooksComponent implements OnInit {
   constructor(private booksService: BooksService, private orderService : OrderService) { }
 
   getBooks(): void {
-    if(this.userId !== 0){
-      this.booksService.getBooks().subscribe(books => this.books = books);
-    }
-   
+    this.booksService.getBooks().subscribe(books => this.books = books);
+
+    setInterval(()=>{
+      if(this.userId !== 0){
+        this.booksService.getBooks().subscribe(books => this.books = books);
+      }
+    }, 1000);
   }
 
   ngOnInit() {
-    this.getBooks();
+      this.getBooks();
   }
-
   addToOrder(book: iBook): void {
-    this.orderService.addToOrder(this.userId, book).subscribe();
-    setTimeout(()=>{
-      this.books = this.books.filter(u => u !== book);
-      this.currentBook = book;
-    }, 100);
+    this.orderService.addToOrder(this.userId, book).subscribe(resp =>{
+      if(typeof(resp) === 'object'){
+        this.books = this.books.filter(u => u !== book);
+        this.currentBook = book;
+      }
+
+      else{
+        alert("Book not be found. Please refresh your site");
+      }
+
+    });
   }
 
   addBookRemovedFromUser(book: iBook) {
     this.getBooks();
   }
-
   
   addBook(book: iBook){
     this.books.push(book);
@@ -51,5 +58,4 @@ export class BooksComponent implements OnInit {
     this.books.splice(index, 1);
     this.addToOrder(book);
   }
-  
 }

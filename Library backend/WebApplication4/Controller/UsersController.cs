@@ -124,18 +124,23 @@ namespace WebApplication4.Controller
         {
             try
             {
-                User user = new User
+                if (_context.User.Where(el => el.Login != userPassword.Login).FirstOrDefault() == null)
                 {
-                    Login = userPassword.Login,
-                    Password = userPassword.Password,
-                    Name = "no name",
-                    Surname = "no surname"
-                };
+                    User user = new User
+                    {
+                        Login = userPassword.Login,
+                        Password = userPassword.Password,
+                        Name = "no name",
+                        Surname = "no surname"
+                    };
 
-                _context.User.Add(user);
-                await _context.SaveChangesAsync();
+                    _context.User.Add(user);
+                    await _context.SaveChangesAsync();
 
-                return user.UserID;
+                    return user.UserID;
+                }
+
+                return 0;
             }
             catch(Exception ex)
             {
