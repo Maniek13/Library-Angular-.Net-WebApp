@@ -1,8 +1,7 @@
-#Biblioteka C# NET WEB APP / Angular
+#Biblioteka C# NET WEB APP / Angular 
 
 
-If want to see please visit: https://178.235.60.107:5022
-
+If want to see please visit: https://178.235.60.107:5022. But site is not responsive. Please visit in fullhd resolution.
 user: admin
 password: 12345
 
