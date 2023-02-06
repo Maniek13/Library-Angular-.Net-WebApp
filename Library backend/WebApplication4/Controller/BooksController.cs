@@ -92,6 +92,11 @@ namespace WebApplication4.Controller
         {
             try
             {
+                if (book.Status != "free" && book.Status != "peeding" && book.Status != "ordered" && book.Status != "issued")
+                {
+                    book.Status = "free";
+                }
+
                 _context.Book.Add(book);
                 await _context.SaveChangesAsync();
 

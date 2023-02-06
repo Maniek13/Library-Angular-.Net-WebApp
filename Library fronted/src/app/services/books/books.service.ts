@@ -3,13 +3,14 @@ import { iBook } from '../../interfaces/iBook';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { settings } from 'src/app/statics/settings';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
-  private booksUrl = 'https://localhost:7216/api/books'
+  private booksUrl = settings.baseUrl + '/api/books'
 
   constructor(private http: HttpClient) { }
 

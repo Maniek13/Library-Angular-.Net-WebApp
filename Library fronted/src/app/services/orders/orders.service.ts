@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { iBook } from '../../interfaces/iBook';
 import { catchError, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { settings } from 'src/app/statics/settings';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private orderUrl = 'https://localhost:7216/api/orders'
+  private orderUrl = settings.baseUrl + '/api/orders'
 
   constructor(private http: HttpClient) { }
 

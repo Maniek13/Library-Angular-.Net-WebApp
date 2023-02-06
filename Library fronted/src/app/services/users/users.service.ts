@@ -4,12 +4,13 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { iUserPassword } from 'src/app/interfaces/IUserPassword';
+import { settings } from 'src/app/statics/settings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private usersUrl = 'https://localhost:7216/api/Users'
+  private usersUrl = settings.baseUrl + '/api/Users'
 
   constructor(private http: HttpClient) { }
 
